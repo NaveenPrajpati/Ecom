@@ -26,6 +26,8 @@ import Navbar from './components/Navbar';
 import { store } from './redux/store';
 import CartPage from './pages/CartPage';
 import { navigationRef } from './navigation/RootNavigation';
+import NavbarBottom from './components/NavbarBottom';
+import Signup from './pages/Signup';
 
 
 const Stack=createNativeStackNavigator()
@@ -34,14 +36,17 @@ const App= () =>  {
 
   return (
     <Provider store={store}>
+      <Navbar />
     <NavigationContainer ref={navigationRef}>
     
     <Stack.Navigator>
 <Stack.Screen name='Home'  component={HomePage} options={{headerShown:false}}/>
-<Stack.Screen name='Login' component={Login}/>
+<Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+<Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
 <Stack.Screen name='Cart' component={CartPage} options={{headerShown:false}}/>
 </Stack.Navigator>
     </NavigationContainer>
+  <NavbarBottom/>
     </Provider>
   );
 };

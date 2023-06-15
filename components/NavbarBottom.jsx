@@ -24,7 +24,7 @@ export default function NavbarBottom() {
       <TouchableOpacity onPress={()=>dispatch(setIsSearch(!isSearch))}>
       <Icon2 name='search'  size={20}  color={'white'}/>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>RootNavigation.navigate('Login')}>
       <Icon2 name='user'  size={20} color={'white'} />
       </TouchableOpacity>
     </View>

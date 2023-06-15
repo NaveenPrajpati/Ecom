@@ -1,17 +1,15 @@
 import { View, Text, FlatList, Image, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Navbar from '../components/Navbar'
-import NavbarBottom from '../components/NavbarBottom'
 import { removeCartItem } from '../redux/slices/cartSlice'
+import WarningModal from '../components/WarningModal'
 
 export default function CartPage() {
+  const[warning,setWarning]=useState(false)
     const {cartItem}=useSelector(state=>state.cartReducer)
     const dispatch=useDispatch()
-const[orderSummary,setOrderSummary]=useState([{
-    title:'',
-    price:''
-}])
+    const {isLogin}=useSelector(state=>state.userReducer)
+
 const[totalPrice,setTotalPrice]=useState(0)
 
 useEffect(()=>{
@@ -22,15 +20,24 @@ useEffect(()=>{
 },[cartItem])
 
 
+function checkLogin(){
+  if(isLogin){
+    console.log('go for payment')
+  }else{
+    console.log('login warning')
+  setWarning(true)
+}
+}
+
+
   return (
     <View>
-      <Navbar/>
       {cartItem.length==0?
       <View>
         <Text>cart is Empty</Text>
       </View>:
       <View>
-      <Text>list</Text>
+      <Text>Cart Items</Text>
       <FlatList
         data={cartItem}
         renderItem={({item,index})=>{
@@ -66,12 +73,12 @@ useEffect(()=>{
                 )}
             />
             <Text>₹{totalPrice}</Text>
-            <Button title='buy'/>
+            <Button title='buy' onPress={checkLogin}/>
          </View>
          </View>
       
       }
-<NavbarBottom/>
+     {warning && <WarningModal message={'please login to checkout'}/>}
     </View>
   )
 }

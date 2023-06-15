@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState={
     isSearch:false,
     searchParam:'',
-    openDrawer:false
+    openDrawer:false,
+    menu:false
 
 }
 
