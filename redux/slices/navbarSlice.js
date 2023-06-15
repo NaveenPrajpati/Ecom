@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 let initialState={
     isSearch:false,
-    searchParam:''
+    searchParam:'',
+    openDrawer:false
 
 }
 
@@ -15,8 +17,12 @@ reducers:{
     setSearchParam(state,action){
         state.searchParam=action.payload
     },
+    setdrawer(state,action){
+        state.openDrawer=action.payload
+    },
+    
 }
 
 })
-export const {setIsSearch,setSearchParam} =navbarSlice.actions
+export const {setIsSearch,setSearchParam,setdrawer} =navbarSlice.actions
 export default navbarSlice.reducer

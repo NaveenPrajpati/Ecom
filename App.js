@@ -24,6 +24,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import { store } from './redux/store';
+import CartPage from './pages/CartPage';
+import { navigationRef } from './navigation/RootNavigation';
 
 
 const Stack=createNativeStackNavigator()
@@ -32,11 +34,12 @@ const App= () =>  {
 
   return (
     <Provider store={store}>
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
     
     <Stack.Navigator>
-<Stack.Screen name='Home'  component={HomePage}  options={{headerShown:false}}/>
+<Stack.Screen name='Home'  component={HomePage} options={{headerShown:false}}/>
 <Stack.Screen name='Login' component={Login}/>
+<Stack.Screen name='Cart' component={CartPage} options={{headerShown:false}}/>
 </Stack.Navigator>
     </NavigationContainer>
     </Provider>
