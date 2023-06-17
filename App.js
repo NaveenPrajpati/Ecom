@@ -28,6 +28,8 @@ import CartPage from './pages/CartPage';
 import { navigationRef } from './navigation/RootNavigation';
 import NavbarBottom from './components/NavbarBottom';
 import Signup from './pages/Signup';
+import AddressPage from './pages/AddressPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 
 const Stack=createNativeStackNavigator()
@@ -44,6 +46,8 @@ const App= () =>  {
 <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
 <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
 <Stack.Screen name='Cart' component={CartPage} options={{headerShown:false}}/>
+<Stack.Screen name='Address' component={AddressPage} options={{headerShown:false}}/>
+<Stack.Screen name='Checkout' component={CheckoutPage} options={{headerShown:false}}/>
 </Stack.Navigator>
     </NavigationContainer>
   <NavbarBottom/>

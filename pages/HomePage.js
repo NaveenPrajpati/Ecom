@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCartItem, setWishItem} from '../redux/slices/cartSlice'
 import { setdrawer } from '../redux/slices/navbarSlice'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomePage() {
   const [products, setProducts] = useState([])
@@ -11,9 +12,9 @@ export default function HomePage() {
   const [modVisible, setModVisible] = useState(false)
 
   const { isSearch, searchParam, openDrawer } = useSelector(state => state.navbarReducer)
+  const dispatch = useDispatch()
   const { wishItem } = useSelector(state => state.cartReducer)
   const drawer = useRef()
-  const dispatch = useDispatch()
   useEffect(() => {
     const newArr = products.filter((item) => { return item.title.includes(searchParam) });
     setFilterProduct(newArr)
@@ -77,7 +78,7 @@ export default function HomePage() {
           return (
             <View key={index}>
               <TouchableOpacity className='flex-row gap-1 p-2 shadow-xl shadow-slate-400 ' onPress={() => {
-                console.log(item)
+                
                 setShowProduct(item)
                 setModVisible(true)
               }}>

@@ -1,10 +1,12 @@
-import { View, Text, FlatList, Image, Button } from 'react-native'
+import { View, Text, FlatList, Image, Button, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeCartItem } from '../redux/slices/cartSlice'
 import WarningModal from '../components/WarningModal'
+import * as RootNavigation from '../navigation/RootNavigation';
 
-export default function CartPage() {
+
+export default function CartPage({navigation}) {
   const[warning,setWarning]=useState(false)
     const {cartItem}=useSelector(state=>state.cartReducer)
     const dispatch=useDispatch()
@@ -23,8 +25,10 @@ useEffect(()=>{
 function checkLogin(){
   if(isLogin){
     console.log('go for payment')
+    navigation.navigate('address')
   }else{
     console.log('login warning')
+    navigation.navigate('Login')
   setWarning(true)
 }
 }
@@ -37,18 +41,21 @@ function checkLogin(){
         <Text>cart is Empty</Text>
       </View>:
       <View>
+
       <Text>Cart Items</Text>
       <FlatList
         data={cartItem}
         renderItem={({item,index})=>{
          return (<View>
-         <View className='flex-row gap-1 m-1'>
+         <View className='flex-row gap-1 m-1 bg-yellow-100'>
             <Image source={{uri:item.image}} className='w-14 h-14'></Image>
             <View>
             <Text>{item.title}</Text>
-            <View className='flex-row justify-between'>
+            <View className='flex-row justify-around'>
             <Text>₹{item.price}</Text>
-            <Button title='remmove' color={'red'} onPress={()=>dispatch(removeCartItem(item.id))}></Button>
+            <TouchableOpacity onPress={()=>dispatch(removeCartItem(item.id))}>
+            <Text className='text-red-400 font-semibold'>remmove</Text>
+            </TouchableOpacity>
             </View>
             </View>
          </View>
@@ -57,23 +64,26 @@ function checkLogin(){
         )}}
       />
 
-            <View className='bg-slate-300'>
-            <Text>Your order Summary</Text>
+            <View className=' shadow-red-200 m-2 p-2 border rounded-lg '>
+            <Text className='text-md'>Your order Summary</Text>
             <FlatList
                 data={cartItem}
                 renderItem={({item,index})=>(
-                    <View className='bg-slate-200 m-1'>
-                    <View className='flex-row p-1 justify-around border-b-2'>
-            <Text>{item.title.substring(0,10)}</Text>
-            <Text>₹{item.price}</Text>
+                    <View className=''>
+                    <View className='flex-row p-1 justify-around border-b-0.5'>
+            <Text className=''>{item.title.substring(0,10)}</Text>
+            <Text className=''>₹{item.price}</Text>
            
                     </View>
 
                     </View>
                 )}
             />
-            <Text>₹{totalPrice}</Text>
-            <Button title='buy' onPress={checkLogin}/>
+            <View className='flex-row items-center justify-between'>
+            <Text>Total</Text>
+            <Text className='mt-2'>₹{totalPrice}</Text>
+            </View>
+            <Button title='checkout' onPress={checkLogin}/>
          </View>
          </View>
       

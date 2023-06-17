@@ -3,7 +3,8 @@ import { useRef } from "react";
 
 const initialState={
     cartItem:[],
-    wishItem:[]
+    wishItem:[],
+    checkoutData:[]
 }
 
 
@@ -21,6 +22,9 @@ export const cartSlice=createSlice({
         setWishItem(state,action){
             state.wishItem.push(action.payload)
         },
+        setCheckOutData(state,action){
+            state.checkoutData=action.payload
+        }
     }
 })
 
@@ -32,5 +36,5 @@ export const useMyRef = () => {
     return ref;
   };
 
-export const {setCartItem,removeCartItem,setWishItem} =cartSlice.actions
+export const {setCartItem,removeCartItem,setWishItem,setCheckOutData} =cartSlice.actions
 export default cartSlice.reducer

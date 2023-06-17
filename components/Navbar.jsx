@@ -28,7 +28,7 @@ export default function Navbar() {
     }}>
    <Icon2 name='x' size={20} color={'black'}/></TouchableOpacity>
    </View>:
-    <Text className='text-white'>Ecommerce app</Text>}
+    <Text className='text-white text-lg font-semibold'>Ecommerce app</Text>}
     </View>
     <TouchableOpacity onPress={()=>RootNavigation.navigate('Cart')} className='flex-row relative cursor-pointer'>
     <Icon name="shopping-cart" size={20} color="white" ></Icon>
