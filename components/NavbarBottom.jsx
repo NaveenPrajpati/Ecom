@@ -14,18 +14,18 @@ export default function NavbarBottom() {
   const dispatch=useDispatch()
 
   return (
-    <View className='flex-row justify-between px-2 py-1 bg-gray-400 h-8'>
+    <View className='flex-row justify-around items-center bg-white px-2 py-1  h-16'>
       <TouchableOpacity onPress={()=>RootNavigation.navigate('Home')}>
-      <Icon name='home'  size={20} color={'white'} />
+      <Icon name='home'  size={30} color={'gray'} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => dispatch(setdrawer(true))}>
-      <Icon name='heart-outlined'  size={20}  color={'white'}/>
+      <Icon name='heart-outlined'  size={30}  color={'gray'}/>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>dispatch(setIsSearch(!isSearch))}>
-      <Icon2 name='search'  size={20}  color={'white'}/>
+      <Icon2 name='search'  size={30}  color={'gray'}/>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>RootNavigation.navigate('Login')}>
-      <Icon2 name='user'  size={20} color={'white'} />
+      <Icon2 name='user'  size={30} color={'gray'} />
       </TouchableOpacity>
     </View>
   )

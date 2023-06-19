@@ -12,26 +12,26 @@ export default function Navbar() {
   const dispatch=useDispatch()
  
   return (
-    <View className='bg-blue-400  flex flex-row justify-between h-10 p-1 items-center'>
+    <View className='bg-white flex flex-row justify-between h-16 p-1 px-5 items-center'>
     {/* <View></View> */}
     <TouchableOpacity onPress={()=>console.warn('menu open')}>
-    <Icon name="menu" size={20} color="white" ></Icon>
+    <Icon name="menu" size={30} color="black" ></Icon>
     </TouchableOpacity>
     
     <View>
     {isSearch?
-    <View className='flex-row items-center  bg-white rounded-md cursor-pointer'>
-   <TextInput onChangeText={(nativeEvent)=>dispatch(setSearchParam(nativeEvent))} className=' w-28  p-1'></TextInput>
+    <View className='flex-row items-center  bg-gray-200 rounded-md cursor-pointer'>
+   <TextInput onChangeText={(nativeEvent)=>dispatch(setSearchParam(nativeEvent))} className=' w-32  p-1'></TextInput>
    <TouchableOpacity onPress={()=>{
     dispatch(setIsSearch(false))
     dispatch(setSearchParam(''))
     }}>
-   <Icon2 name='x' size={20} color={'black'}/></TouchableOpacity>
+   <Icon2 name='x' size={30} color={'black'}/></TouchableOpacity>
    </View>:
-    <Text className='text-white text-lg font-semibold'>Ecommerce app</Text>}
+    <Text className='text-blue-500 text-3xl font-semibold'>Ecommerce app</Text>}
     </View>
     <TouchableOpacity onPress={()=>RootNavigation.navigate('Cart')} className='flex-row relative cursor-pointer'>
-    <Icon name="shopping-cart" size={20} color="white" ></Icon>
+    <Icon name="shopping-cart" size={30} color="black" ></Icon>
    {cartItem.length>0 && <Text className='h-4 w-4 bg-white rounded-full text-center font-semibold absolute -translate-y-2'>{cartItem.length}</Text>}
     </TouchableOpacity>
     </View>

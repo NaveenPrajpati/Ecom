@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCartItem, setWishItem} from '../redux/slices/cartSlice'
 import { setdrawer } from '../redux/slices/navbarSlice'
+import Icon2 from 'react-native-vector-icons/Feather';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomePage() {
@@ -23,8 +25,8 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(json => {
+      .then(res=> res.json())
+      .then(json=> {
         setProducts(json)
       })
       .catch(error => console.log(error))
@@ -53,8 +55,16 @@ export default function HomePage() {
                 <Image source={{ uri: item.image }} className='w-16 h-16'></Image>
                 <Text>{item.title}</Text>
                 <Text>₹{item.price}</Text>
-                <Button title='Add to Cart' onPress={() => dispatch(setCartItem(item))}></Button>
-                <Button title='remove' onPress={() => dispatch(setCartItem(item))}></Button>
+
+                
+                <View className='flex '>
+                <TouchableOpacity onPress={() => dispatch(setCartItem(item))}>
+                <Text>Add to Cart</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => dispatch(setCartItem(item))}>
+                <Text>remove</Text>
+                </TouchableOpacity>
+                </View>
               </View>
             )
           }}
@@ -74,18 +84,20 @@ export default function HomePage() {
       drawerPosition={'right'}
       renderNavigationView={navigationView}>
       <View className=''>
-        <FlatList data={isSearch ? filterProduct : products} renderItem={({ item, index }) => {
+        <FlatList data={isSearch ? filterProduct : products}
+        numColumns={2}
+         renderItem={({ item, index }) => {
           return (
-            <View key={index}>
-              <TouchableOpacity className='flex-row gap-1 p-2 shadow-xl shadow-slate-400 ' onPress={() => {
+            <View key={index} className=' items-center'>
+              <TouchableOpacity className=' rounded-lg p-2 shadow-xl shadow-black  w-44 m-4 ' onPress={() => {
                 
                 setShowProduct(item)
                 setModVisible(true)
               }}>
-                <Image source={{ uri: item.image }} className='w-14 h-14'></Image>
-                <View className='p-1'>
-                  <Text  className='font-semibold'>{item.title}</Text>
-                  <Text className='text-green-500 text-lg font-bold'>₹{item.price}</Text>
+                <Image source={{ uri: item.image }} className='w-full h-36 object-contain rounded-lg'></Image>
+                <View className='p-1 '>
+                  <Text  className='font-semibold text-center'>{item.title.substring(0,10)}</Text>
+                  <Text className='text-red-500 text-lg font-bold text-center'>₹{item.price}</Text>
                 </View>
               </TouchableOpacity>
 
@@ -101,14 +113,28 @@ export default function HomePage() {
                     }}>
                     <View className=' justify-center h-screen p-2 '>
                       <View className='flex items-center bg-white rounded-lg relative p-2' >
-                        <Image source={{ uri: showProduct.image }} className='w-36 h-36 '></Image>
-                        <Text className='font-semibold text-black'>{showProduct.title}</Text>
+                        <Image source={{ uri: showProduct.image }} className=' w-52 h-52 '></Image>
+                        <Text className='font-semibold text-black mt-5'>{showProduct.title}</Text>
                         <Text className='font-semibold'>{showProduct.description}</Text>
+                        <View className='flex-row justify-around'>
+                        <View>
+                          <Text>  quantity</Text>
+                        </View>
                         <Text className='text-green-500 text-lg font-bold'>₹{showProduct.price}</Text>
-                        <Button title='like' onPress={() => dispatch(setWishItem(showProduct))}></Button>
-                        <Button title='Add to Cart' onPress={() => dispatch(setCartItem(showProduct))}></Button>
+                        </View>
+                        
+                        <View className='flex-row justify-around '>
+                        <TouchableOpacity className='' onPress={() => dispatch(setWishItem(showProduct))}>
+                          <Text>Add to WishList</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => dispatch(setCartItem(showProduct))}>
+                        <Text>Add to Cart</Text>
+
+                        </TouchableOpacity>
+                        </View>
+                      
                         <TouchableOpacity className='absolute right-1 top-1' onPress={() => setModVisible(!modVisible)}>
-                          <Text>close</Text>
+                        <Icon2 name='x' size={30} color={'black'}/>
                         </TouchableOpacity>
                       </View>
                     </View>
