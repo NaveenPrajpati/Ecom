@@ -23,6 +23,14 @@ export default function AddressPage({navigation}) {
       setUserdata(getData)
 
      async function addAddress(){
+     
+      }
+
+      addAddress()
+    },[])
+
+
+    function handleAddress(){
       firestore()
       .collection('Users')
       .doc(userdata.email)
@@ -32,14 +40,6 @@ export default function AddressPage({navigation}) {
       .then(() => {
         console.log('User updated!');
       });
-      }
-
-      addAddress()
-    },[])
-
-
-    function handleAddress(){
-
       
     }
 

@@ -22,7 +22,7 @@ export default function Login({navigation}) {
     console.log('login success')
     dispatch(setLogin(true))
     dispatch(setUserData(data))
-    navigation.navigate.goBack()  
+    navigation.navigate(-1) 
 
   const  setObjectValue = async (value) => {
       try {

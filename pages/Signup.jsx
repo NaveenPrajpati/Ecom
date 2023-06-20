@@ -10,7 +10,7 @@ export default function Signup() {
   const[role,setRole]=useState('')
   const[email,setEmail]=useState('')
   const[password,setPassword]=useState('')
-  const[address,setAddress]=useState([''])
+  const[address,setAddress]=useState([null])
   
     const handleSignup = () => {
         firestore()
@@ -19,7 +19,7 @@ export default function Signup() {
     name: username,
     email:email,
     role:role,
-    // address:address,
+    address:address,
     password:password
   })
   .then(() => {
