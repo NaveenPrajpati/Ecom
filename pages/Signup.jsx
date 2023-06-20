@@ -10,7 +10,7 @@ export default function Signup() {
   const[role,setRole]=useState('')
   const[email,setEmail]=useState('')
   const[password,setPassword]=useState('')
-  const[address,setAddress]=useState([null])
+  const[address,setAddress]=useState([''])
   
     const handleSignup = () => {
         firestore()
@@ -24,7 +24,7 @@ export default function Signup() {
   })
   .then(() => {
     console.log('User added!');
-    ToastAndroid.show('user register sucessFully')
+    ToastAndroid.show('user register sucessFully',ToastAndroid.BOTTOM)
     RootNavigation.navigate('Login')
   });
       };

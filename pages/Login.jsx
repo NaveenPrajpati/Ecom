@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, TouchableOpacity, TouchableOpacityBase } from 'react-native'
+import { View, Text, TextInput, Button, TouchableOpacity, TouchableOpacityBase, ToastAndroid } from 'react-native'
 import React, { useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,32 +16,43 @@ export default function Login({navigation}) {
    
     const user = await firestore().collection('Users').where('email','==',email).get();
     console.log(user.docs[0]._data)
+  
     let data=user.docs[0]._data
+    let id=user.docs[0].id
+    console.log(id)
+
     
     if(password==data.password){
-    console.log('login success')
+   
+    
     dispatch(setLogin(true))
-    dispatch(setUserData(data))
-    navigation.navigate(-1) 
+    dispatch(setUserData({
+      id:id,
+      email:data.email,
+      role:data.role,
+      address:data.address
+    }))
+    
 
-  const  setObjectValue = async (value) => {
-      try {
+
         const jsonValue = JSON.stringify({
-          name:data.username,
+         
           email:data.email,
+          id:id,
           address:data.address,
           role:data.role
         })
-        await AsyncStorage.setItem('userData', jsonValue)
-      } catch(e) {
-        // save error
-      }
+       AsyncStorage.setItem('userData', jsonValue)
+     
     
       console.log('Done.')
-    }
-    setObjectValue
+    
 
+    ToastAndroid.show('login success',ToastAndroid.BOTTOM)
+    navigation.goBack()
     }
+    ToastAndroid.show('login fail',ToastAndroid.BOTTOM)
+
   };
 
   return (
