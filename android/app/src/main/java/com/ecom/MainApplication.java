@@ -1,6 +1,6 @@
 package com.ecom;
 
-import com.razorpay.rn.RazorpayPackage;
+
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -11,6 +11,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import com.ecom.newarchitecture.MainApplicationReactNativeHost;
+import com.razorpay.rn.RazorpayPackage;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          packages.add(new RazorpayPackage());
+          // packages.add(new RazorpayPackage());
           return packages;
         }
 

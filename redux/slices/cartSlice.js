@@ -5,7 +5,7 @@ const initialState={
     cartItem:[],
     cartiItemQuantity:[],
     wishItem:[],
-    checkoutData:[]
+    checkoutData:{}
 }
 
 

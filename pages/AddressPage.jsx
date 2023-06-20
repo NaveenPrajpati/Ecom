@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CheckoutPage from './CheckoutPage';
 
 
 export default function AddressPage({navigation}) {
@@ -82,9 +83,11 @@ export default function AddressPage({navigation}) {
     </TouchableOpacity>}
 
 
-   {add && <TouchableOpacity onPress={()=>navigation.navigate('Checkout')}>
-      <Text>go to checkout</Text>
-    </TouchableOpacity>}
+   {add && <View>
+      <CheckoutPage />
+    </View>}
+
+
     </View>
   )
 }

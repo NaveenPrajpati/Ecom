@@ -1,7 +1,7 @@
 import { View, Text, FlatList, Image, Button, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCartItem } from '../redux/slices/cartSlice'
+import { removeCartItem, setCheckOutData } from '../redux/slices/cartSlice'
 import WarningModal from '../components/WarningModal'
 import * as RootNavigation from '../navigation/RootNavigation';
 import Icon2 from 'react-native-vector-icons/Feather';
@@ -13,7 +13,7 @@ export default function CartPage({navigation}) {
     const dispatch=useDispatch()
     const {isLogin}=useSelector(state=>state.userReducer)
     
-
+const[shippingCharge,setShippingCharge]=useState(50)
 const[totalPrice,setTotalPrice]=useState(0)
 
 useEffect(()=>{
@@ -28,6 +28,9 @@ useEffect(()=>{
 function checkLogin(){
   if(isLogin){
     console.log('go for payment')
+    dispatch(setCheckOutData({
+      price:Math.round(totalPrice+shippingCharge)
+    }))
     navigation.navigate('Address')
   }else{
     console.log('login warning')
@@ -91,11 +94,11 @@ function checkLogin(){
                     </View>
                     <View className='flex-row p-1 justify-around border-b-0.5'>
             <Text className=''>shipping</Text>
-            <Text className=''>₹{50}</Text>
+            <Text className=''>₹{shippingCharge}</Text>
                     </View>
                     <View className='flex-row p-1 justify-around border-b-0.5'>
             <Text className=''>Total</Text>
-            <Text className=''>₹{totalPrice+50}</Text>
+            <Text className=''>₹{totalPrice+shippingCharge}</Text>
                     </View>
                     </View>
 

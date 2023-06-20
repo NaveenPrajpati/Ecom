@@ -47,7 +47,6 @@ const App= () =>  {
 <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
 <Stack.Screen name='Cart' component={CartPage} options={{headerShown:false}}/>
 <Stack.Screen name='Address' component={AddressPage} options={{headerShown:false}}/>
-<Stack.Screen name='Checkout' component={CheckoutPage} options={{headerShown:false}}/>
 </Stack.Navigator>
     </NavigationContainer>
   <NavbarBottom/>
